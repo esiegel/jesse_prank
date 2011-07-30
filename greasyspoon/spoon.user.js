@@ -10,6 +10,12 @@
 // @include       http://www.reddit.com
 // @include       http://www.reddit.com/
 // @include       http://www.reddit.com/r/*
+// @include       http://*.craigslist.org/*
+// @include       http://*.craigslist.org
+// @include       http://*.craigslist.org/
+// @include       http://www.*.craigslist.org/*
+// @include       http://www.*.craigslist.org
+// @include       http://www.*.craigslist.org/
 // ==/UserScript==
 
 //jquery
@@ -26,8 +32,8 @@ var removeRandomElement = function(arr) {
    return arr.splice(index,1);
 }
 
-var hideElement = function(e)   { $(e).hide(0.2);   }
-var removeElement = function(e) { $(e).remove();console.log('blah'); }
+var hideElement = function(e)   { $(e).hide(0.2); }
+var removeElement = function(e) { $(e).remove();  }
 
 /*
  * Calls element .remove on all elements
@@ -47,15 +53,13 @@ var dither = function(elements, start_wait, element_wait) {
 }
 
 $(document).ready(function() {
-   var all = $('*');
-   var divs = $('div');
-   var ps = $('p');
-   var spans = $('span');
-   var lis  = $('li');
-   dither(ps, 1000, 200);
-   dither(lis, 6000, 200);
-   dither(spans, 12000, 200);
-   dither(divs, 16000, 500);
-   dither(all, 20000, 50);
+   dither($('p'), 1000, 200);
+   dither($('li'), 6000, 200);
+   dither($('a'), 6000, 200);
+   dither($('img'), 8000, 400);
+   dither($('form'), 8000, 400);
+   dither($('span'), 8000, 200);
+   dither($('div'), 10000, 100);
+   dither($('table'), 10000, 100);
 });
 
