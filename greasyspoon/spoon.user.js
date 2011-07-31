@@ -64,11 +64,13 @@ jesse.dither = function(elements, start_wait, element_wait) {
 }
 
 jesse.createOrGetContainer = function() {
-   var container = $('jesseContainer');
-   if(container == null || container == undefined) {
+   var container = $('#jesseContainer');
+   if(container.length == 0) {
       var container = $('<div></div>');
-      container.css('id', 'jesseContainer');
-      $('body').append(container);
+      container.attr('id', 'jesseContainer');
+      container.css('margin-left', '20%');
+      container.css('margin-right', '20%');
+      $('body').prepend(container);
       return container;
    }
 
@@ -94,12 +96,12 @@ jesse.shouldDither = function(events) {
 }
 
 jesse.ditherAll = function() {
-   jesse.dither($('p'), 1000, 200);
-   jesse.dither($('li'), 6000, 200);
-   jesse.dither($('a'), 6000, 200);
-   jesse.dither($('img'), 8000, 400);
-   jesse.dither($('form'), 8000, 400);
-   jesse.dither($('span'), 8000, 200);
+   jesse.dither($('p'), 1000, 100);
+   jesse.dither($('li'), 6000, 100);
+   jesse.dither($('a'), 6000, 100);
+   jesse.dither($('img'), 8000, 100);
+   jesse.dither($('form'), 8000, 100);
+   jesse.dither($('span'), 8000, 100);
    jesse.dither($('div'), 10000, 100);
    jesse.dither($('table'), 10000, 100);
 
@@ -113,33 +115,100 @@ jesse.ditherAll = function() {
  *  [{event:"say","So you think you are THE Jesse?"}, {event:"ask", "content":"What is your name"}] 
  */
 jesse.handleResponse = function(events) {
+   var dithered_old = jesse.dithered;
    var sd = jesse.shouldDither(events);
    if(sd == true) {
       jesse.ditherAll();
    }
 
+   //amount to delay the say and asks
+   var baseDelay = 1000;
+   if(dithered_old != jesse.dithered) {
+      //higher delay waiting for more dithering to finish
+      baseDelay = 10000;
+   }
+
    for(var i=0; i<events.length; i++) {
       var ev = events[i];
+      var delay = baseDelay + (i*1500);
+
       if(ev.event == "say") {
-         jesse.handleResponseSay(ev.content);
+         jesse.handleResponseSay(ev.content, delay);
       } else if(ev.event == "ask") {
-         jesse.handleResponseAsk(ev.content);
+         jesse.handleResponseAsk(ev.content, delay);
       } else {
          jesse.handleResponseUnknown(ev.content);
       }
    }
 }
 
-jesse.handleResponseSay = function() {
-   console.log("say response");
+jesse.handleResponseSay = function(content, delay) {
+   var handle = function() {
+      var container = jesse.createOrGetContainer();
+
+      var div = $('<div></div>');
+      div.attr("class", "jesseAsk");
+      div.css("margin", "10px 10px");
+
+      var p   = $('<p></p>');
+      p.html(content);
+      p.css("font-size", "6em");
+
+      div.append(p);
+      container.append(div);
+      console.log("say response");
+   }
+   
+   setTimeout(handle,delay); 
 }
 
-jesse.handleResponseAsk = function() {
-   console.log("ask response");
+jesse.handleResponseAsk = function(content, delay) {
+   var handle = function() {
+      var container = jesse.createOrGetContainer();
+
+      var div = $('<div></div>');
+      div.attr("class", "jesseAsk");
+      div.css("margin", "10px 10px");
+
+      //var form = $('<form></form>');
+      //form.attr('action', 'http://iamthejesse.com/answer');
+      //form.attr('method', 'post');
+
+      var text = $('<input></input>');
+      text.attr('type', 'text');
+      text.attr('name', 'answer');
+      text.css('width', '100%');
+      text.css('height', '100px');
+      text.css("font-size", "4em");
+
+      var submit = $('<input></input>');
+      submit.attr('type', 'submit');
+      submit.attr('value', 'answer');
+
+      //add click handler
+      submit.click(function() {alert("still need to post text data");});
+
+      var p   = $('<p></p>');
+      p.html(content);
+      p.css("font-size", "6em");
+
+      //form.append(p);
+      //form.append(text);
+      //form.append(submit);
+
+      //div.append(form);
+      div.append(p);
+      div.append(text);
+      div.append(submit);
+      container.append(div);
+      console.log("ask response");
+   }
+   
+   setTimeout(handle,delay); 
 }
 
-jesse.handleResponseUnknown = function() {
-   console.log("unknown response");
+jesse.handleResponseUnknown = function(content) {
+   console.log("unknown response " + content);
 }
 
 /*
@@ -154,9 +223,15 @@ jesse.update = function() {
    //$.post(url, data, jesse.handleResponse);
    
    jesse.handleResponse([
-         {"event":"say", "times":0, "content":"So you think you are THE Jesse?"}, 
+         {"event":"say", "times":1, "content":"So you think you are THE Jesse?"}, 
+         {"event":"say", "times":1, "content":"blah 1"}, 
+         {"event":"say", "times":1, "content":"blah 2"}, 
+         {"event":"say", "times":1, "content":"blah 3"}, 
          {"event":"ask", "times":0, "content":"What is your name"} 
          ]);
+
+   //should do nothing
+   //jesse.handleResponse([]);
 }
 
 /*
