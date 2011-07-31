@@ -2,20 +2,7 @@
 // @name          Jesse Prank
 // @namespace     http://iamthejesse.com/
 // @description   Jesse Prank GreaseMonkey
-// @include       http://reddit.com/*
-// @include       http://reddit.com
-// @include       http://reddit.com/
-// @include       http://reddit.com/r/*
-// @include       http://www.reddit.com/*
-// @include       http://www.reddit.com
-// @include       http://www.reddit.com/
-// @include       http://www.reddit.com/r/*
-// @include       http://*.craigslist.org/*
-// @include       http://*.craigslist.org
-// @include       http://*.craigslist.org/
-// @include       http://www.*.craigslist.org/*
-// @include       http://www.*.craigslist.org
-// @include       http://www.*.craigslist.org/
+// @include       *
 // ==/UserScript==
 
 //jquery
@@ -77,6 +64,14 @@ jesse.createOrGetContainer = function() {
    return container;
 }
 
+jesse.clearContainer = function() {
+   var container = jesse.createOrGetContainer();
+   container.children().each(function(index, element) {
+      var e = $(element);
+      e.hide('slow', function() {e.remove();});
+   });
+}
+
 /*
  * only should dither if we haven't seen either of the events
  */
@@ -120,6 +115,8 @@ jesse.handleResponse = function(events) {
    if(sd == true) {
       jesse.ditherAll();
    }
+
+   jesse.clearContainer();
 
    //amount to delay the say and asks
    var baseDelay = 1000;
@@ -186,7 +183,20 @@ jesse.handleResponseAsk = function(content, delay) {
       submit.attr('value', 'answer');
 
       //add click handler
-      submit.click(function() {alert("still need to post text data");});
+      submit.click(function(handlerObj) {
+         var clicked = $(handlerObj.target);
+         var url = "http://www.iamthejesse.com/answer";
+         var data = {};
+         data['answer'] = text.val();
+         console.log(text.val());
+
+         //$.post(url, data, jesse.handleResponse);
+         jesse.handleResponse([
+               {"event":"say", "times":1, "content":"Answered a question!"}, 
+               {"event":"say", "times":1, "content":"Cool"}, 
+               {"event":"ask", "times":0, "content":"How about another"} 
+               ]);
+      });
 
       var p   = $('<p></p>');
       p.html(content);
