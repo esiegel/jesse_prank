@@ -141,6 +141,9 @@ jesse.handleResponse = function(events) {
 
 jesse.handleResponseSay = function(ev, delay) {
    var handle = function() {
+      if(ev.redirect) {
+        window.location.href = ev.redirect;
+      }
       var container = jesse.createOrGetContainer();
 
       var div = $('<div></div>');
@@ -200,7 +203,7 @@ jesse.handleResponseAsk = function(ev, delay) {
          //$.post(url, data, jesse.handleResponse);
          jesse.handleResponse([
                {"event":"say", "times":1, "content":"Answered a question!"}, 
-               {"event":"say", "times":1, "content":"Cool"}, 
+               {"event":"say", "times":1, "content":"Cool", "redirect":"http://www.youtube.com/watch?v=dQw4w9WgXcQ&ob=av2e"}, 
                {"event":"say", "times":1, "content":"asdf", "imgUrl":"http://skepticalteacher.files.wordpress.com/2011/01/pwned-facekick.jpg"}, 
                {"event":"ask", "times":0, "content":"How about another"} 
                ]);
