@@ -109,7 +109,6 @@ def get_correct(event_no, times):
 
 @app.route("/", methods=['GET'])
 def index():
-
     for event in events:
         print event
     return jsonify()
@@ -117,9 +116,10 @@ def index():
 @app.after_request
 def after_request(response):
     if response.status_code < 300:
-        response.headers['Access-Control-Allow-Origin'] = '*'
+        response.headers['Access-Control-Allow-Origin'] = 'http://jquery.com'
         response.headers['Access-Control-Allow-Methods'] = 'OPTIONS, GET, POST, PUT, DELETE'
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, User-Agent, X-Requested-With, Cache-Control'
+        response.headers['Access-Control-Allow-Credentials'] = 'true'
 
     return response
 
