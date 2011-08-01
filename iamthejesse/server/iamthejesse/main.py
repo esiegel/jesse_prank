@@ -96,7 +96,8 @@ def get_correct(event_no, times):
     event = events[event_no]
     update = {}
 
-    update['times'] = times
+    #always send correct once
+    update['times'] = 0 
     update['events'] = event['correct']
 
     next_question = get_question(event_no+1, times)
