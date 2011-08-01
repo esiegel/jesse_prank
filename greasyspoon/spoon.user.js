@@ -130,28 +130,35 @@ jesse.handleResponse = function(events) {
       var delay = baseDelay + (i*1500);
 
       if(ev.event == "say") {
-         jesse.handleResponseSay(ev.content, delay);
+         jesse.handleResponseSay(ev, delay);
       } else if(ev.event == "ask") {
-         jesse.handleResponseAsk(ev.content, delay);
+         jesse.handleResponseAsk(ev, delay);
       } else {
-         jesse.handleResponseUnknown(ev.content);
+         jesse.handleResponseUnknown(ev);
       }
    }
 }
 
-jesse.handleResponseSay = function(content, delay) {
+jesse.handleResponseSay = function(ev, delay) {
    var handle = function() {
       var container = jesse.createOrGetContainer();
 
       var div = $('<div></div>');
-      div.attr("class", "jesseAsk");
+      div.attr("class", "jesseSay");
       div.css("margin", "10px 10px");
 
       var p   = $('<p></p>');
-      p.html(content);
+      p.html(ev.content);
       p.css("font-size", "6em");
 
       div.append(p);
+
+      if(ev.imgUrl) {
+          var img = $('<img></img>');
+          img.attr('src', ev.imgUrl);
+          div.append(img);
+      }
+
       container.append(div);
       console.log("say response");
    }
@@ -159,7 +166,7 @@ jesse.handleResponseSay = function(content, delay) {
    setTimeout(handle,delay); 
 }
 
-jesse.handleResponseAsk = function(content, delay) {
+jesse.handleResponseAsk = function(ev, delay) {
    var handle = function() {
       var container = jesse.createOrGetContainer();
 
@@ -194,20 +201,23 @@ jesse.handleResponseAsk = function(content, delay) {
          jesse.handleResponse([
                {"event":"say", "times":1, "content":"Answered a question!"}, 
                {"event":"say", "times":1, "content":"Cool"}, 
+               {"event":"say", "times":1, "content":"asdf", "imgUrl":"http://skepticalteacher.files.wordpress.com/2011/01/pwned-facekick.jpg"}, 
                {"event":"ask", "times":0, "content":"How about another"} 
                ]);
       });
 
       var p   = $('<p></p>');
-      p.html(content);
+      p.html(ev.content);
       p.css("font-size", "6em");
 
-      //form.append(p);
-      //form.append(text);
-      //form.append(submit);
-
-      //div.append(form);
       div.append(p);
+
+      if(ev.imgUrl) {
+          var img = $('<img></img>');
+          img.attr('src', ev.imgUrl);
+          div.append(img);
+      }
+
       div.append(text);
       div.append(submit);
       container.append(div);
@@ -217,8 +227,8 @@ jesse.handleResponseAsk = function(content, delay) {
    setTimeout(handle,delay); 
 }
 
-jesse.handleResponseUnknown = function(content) {
-   console.log("unknown response " + content);
+jesse.handleResponseUnknown = function(ev) {
+   console.log("unknown response " + ev.content);
 }
 
 /*
@@ -236,7 +246,7 @@ jesse.update = function() {
          {"event":"say", "times":1, "content":"So you think you are THE Jesse?"}, 
          {"event":"say", "times":1, "content":"blah 1"}, 
          {"event":"say", "times":1, "content":"blah 2"}, 
-         {"event":"say", "times":1, "content":"blah 3"}, 
+         {"event":"say", "times":1, "content":"blah 3", "imgUrl":"http://www.dylanscandybar.com/resources/dylans/images/products/processed/110-93777.a.zoom.jpg"}, 
          {"event":"ask", "times":0, "content":"What is your name"} 
          ]);
 
