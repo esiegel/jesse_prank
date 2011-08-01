@@ -1,46 +1,9 @@
+from questions import events
 from flask import Flask, json, jsonify, request, session
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'dev key'
 
 status = 0 # current progress state
-
-
-events = [
-        {
-            "messages" : [{
-                "type":"say",
-                "content":"So you think you are THE Jesse?"
-            },
-            {
-                "type":"say",
-                "content":"blah 1"
-            },
-            {
-                "type":"ask",
-                "content":"http://craigslist.com"
-            },
-            {
-                "type":"ask",
-                "content":"What is your name?"
-            }],
-            "answer" : 'jesse'
-        },
-        {
-            "messages" : [{
-                "type":"say",
-                "content":"now we know you MAYBE Jesse?"
-            },
-            {
-                "type":"say",
-                "content":"blah 1"
-            },
-            {
-                "type":"ask",
-                "content":"Who is a banana?"
-            }],
-            "answer" : 'iama'
-        }
-    ]
 
 @app.route("/update", methods=['POST', 'GET'])
 def update():
@@ -52,7 +15,10 @@ def update():
         # means navigation witout answering the question
         session['times'] = session['times'] + 1
 
-    return jsonify(get_update(0, session['times']))
+    #shouldn't always send number 0
+    event_no = session['status']
+    times = session['times']
+    return jsonify(get_question(event_no, times))
 
     if request.json:
         status.from_dict(request.json)
@@ -62,38 +28,81 @@ def update():
 def answer():
     if not 'status' in session:
         session['status'] = 0
-        session['status'] = 0
+        session['times'] = 0
 
     event_no = session['status']
     if request.json:
         if 'answer' in request.json:
-            if answer.strip().lower() == events[event_no].answer:
+            if events[event_no]['verifier'](request.json['answer']):
                 if event_no > len(events):
                     # TODO: SOME CELEBRATION
                     pass
                 
+                # get correct messages, includes next question
+                correct = get_correct(event_no, session['times'])
+
                 # Correct answer, update status, reset times
                 # and send new question
                 event_no = event_no + 1
-                # get new question
-                update = get_update(event_no, session['times'])
 
                 # update cookie and send response
                 session['status'] = event_no
                 session['times'] = 0
 
-                return jsonify(update)
+                return jsonify(correct)
             else:
                 # incorrect answer, increment times
                 session['times'] = session['times'] + 1
+                incorrect = get_incorrect(event_no, session['times'])
+                return jsonify(incorrect)
 
 
-def get_update(event_no, times):
+def get_question(event_no, times):
+    """just gets the questions to send"""
+    if event_no >= len(events):
+       return {}
+
     event = events[event_no]
     update = {}
 
     update['times'] = times
-    update['events'] = event['messages']
+    update['events'] = event['question']
+
+    return update
+
+def get_incorrect(event_no, times):
+    """gets the incorrect messages and also resends the question"""
+    if event_no >= len(events):
+       return {}
+
+    event = events[event_no]
+    update = {}
+
+    update['times'] = times
+    update['events'] = event['incorrect']
+
+    current_question = get_question(event_no, times)
+    if current_question.has_key('events'):
+       for q in current_question['events']:
+          update['events'].append(q)
+
+    return update
+
+def get_correct(event_no, times):
+    """gets the correct messages and also sends the next question"""
+    if event_no >= len(events):
+       return {}
+
+    event = events[event_no]
+    update = {}
+
+    update['times'] = times
+    update['events'] = event['correct']
+
+    next_question = get_question(event_no+1, times)
+    if next_question.has_key('events'):
+       for q in next_question['events']:
+          update['events'].append(q)
 
     return update
 
