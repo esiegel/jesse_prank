@@ -4,8 +4,8 @@ def alwaysTrue(content):
 def meaning_life(content):
    try:
       return int(content)==42
-   except
-      return false
+   except:
+      return False
 
 def swallow(content):
    c = content.lower()
@@ -22,8 +22,8 @@ def frisbee(content):
    try:
       val = float(content)
       return 21 < val < 25
-   except
-      return false
+   except:
+      return False
 
 def narwhal(content):
    return "midnight" == content.lower()
@@ -31,8 +31,8 @@ def narwhal(content):
 def jenny(content):
    try:
       return int(content) == 8675309
-   except
-      return false
+   except:
+      return False
 
 def quine(content):
    return "quine" == content.lower()
@@ -206,4 +206,3 @@ events =[
         "verifier":quine
     }
 ]
-

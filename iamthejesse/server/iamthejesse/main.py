@@ -18,14 +18,13 @@ def update():
     #shouldn't always send number 0
     event_no = session['status']
     times = session['times']
+    
+    print 'update', session
     return jsonify(get_question(event_no, times))
-
-    if request.json:
-        status.from_dict(request.json)
-        session.commit()
 
 @app.route("/answer", methods=['POST'])
 def answer():
+    print 'answer', session
     if not 'status' in session:
         session['status'] = 0
         session['times'] = 0
@@ -49,13 +48,14 @@ def answer():
                 session['status'] = event_no
                 session['times'] = 0
 
+                print 'update', session
                 return jsonify(correct)
             else:
                 # incorrect answer, increment times
                 session['times'] = session['times'] + 1
                 incorrect = get_incorrect(event_no, session['times'])
+                print 'update', session
                 return jsonify(incorrect)
-
 
 def get_question(event_no, times):
     """just gets the questions to send"""
@@ -116,7 +116,7 @@ def index():
 @app.after_request
 def after_request(response):
     if response.status_code < 300:
-        response.headers['Access-Control-Allow-Origin'] = 'http://jquery.com'
+        response.headers['Access-Control-Allow-Origin'] = request.headers['Origin']
         response.headers['Access-Control-Allow-Methods'] = 'OPTIONS, GET, POST, PUT, DELETE'
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, User-Agent, X-Requested-With, Cache-Control'
         response.headers['Access-Control-Allow-Credentials'] = 'true'
