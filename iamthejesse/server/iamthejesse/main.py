@@ -100,7 +100,6 @@ def get_update(event_no, times):
 
 @app.route("/", methods=['GET'])
 def index():
-
     for event in events:
         print event
     return jsonify()
