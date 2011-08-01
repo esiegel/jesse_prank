@@ -1,6 +1,3 @@
-what is your name. (anything, jesse)
-What is the meaning of life and everything (42)
-What is the maximum airspeed velocity of an unladen swallow? And no we are referring to python. (Is it an african or european swallow?)
 Where is Drizzt Do'Urdon from? (Menzzoberranzon)
 Who is the star of the movie Blue Harvest?  (Luke Skywalker | Mark Hammil)
 Who is your favorite coworker? (Any answer we return, That's not very nice. But what about me)
@@ -9,4 +6,47 @@ Why do I exist? (Any)  (That was rhetorical)
 [Send a link to a jelly bean jar] How many beans? (anything reasonable)
 ...
 
+Responses always merge the next question messages. 
+Wrong answers always include the question again.
+For example the response for question 1 is "interesting...indeed",
+also send the messages for 2 about the meaning of life
 
+
+1)
+M  So you thing you are the Jesse?
+M  You must first proove your worth.
+M  ...
+Q  What is your Name?
+
+Correct 
+   anything, save this name with the user model
+
+   M  Interesting...indeed.  ("http://images.icanhascheezburger.com/completestore/2008/6/15/thermometer128580142962485736.jpg")
+
+Wrong
+   never
+
+2)
+Q  What is the meaning of life and everything?
+
+Correct
+   42
+
+   M Someone appeers to be a nerd. ("http://3.bp.blogspot.com/_5QKKOF-S5mM/TOYrbd91dWI/AAAAAAAAAAM/jrCjx45sFYc/s1600/nerds.jpg")
+   M You probably even noticed my typing mistake.
+
+Wrong
+   M nope
+
+3)
+Q  What is the maximum airspeed velocity of an unladen swallow?  And no we are not referring to python.
+
+Correct
+   Is it an african or european swallow? (except response that has african, european and swallow) 
+
+   M Someone appeers to be a nerd. ("http://3.bp.blogspot.com/_5QKKOF-S5mM/TOYrbd91dWI/AAAAAAAAAAM/jrCjx45sFYc/s1600/nerds.jpg")
+   M You probably even noticed my typing mistake.
+
+Wrong
+   M Clue:
+   M http://lmgtfy.com/ 
