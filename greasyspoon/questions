@@ -1,8 +1,3 @@
-Where is Drizzt Do'Urdon from? (Menzzoberranzon)
-Why do I exist? (Any)  (That was rhetorical)
-[Send a link to a jelly bean jar] How many beans? (anything reasonable)
-...
-
 Responses always merge the next question messages. 
 Wrong answers always include the question again.
 For example the response for question 1 is "interesting...indeed",
@@ -90,6 +85,33 @@ also send the messages for 2 about the meaning of life
             {"event":"say", "content":"Clue:"},
             {"event":"say", "content":"I am your father", "imgUrl":"http://1.bp.blogspot.com/_x0AzhByC-qQ/TB7RvNbgtRI/AAAAAAAACTI/qeeZgVDcDUE/s1600/father.gif"}
         ]
+    },
+
+    {
+        "question":[
+            {"event":"ask", "content":"How many seconds would it take a frisbee to fall 1KM on Mars?", "imgUrl":"http://www.shockya.com/news/wp-content/uploads/total_recall_arnold_scream1.jpg"}
+            {"event":"say", "content":"ignoring atmospheric effects, of course"}
+        ],
+        "correct":[
+            {"event":"say", "content":"Physics Rocks!", "imgUrl":"http://chzmemebase.files.wordpress.com/2011/05/memes-meanwhile.jpg"}
+        ],
+        "incorrect":[
+            {"event":"say", "content":"Clue:"},
+            {"event":"say", "content":"38% gravity aqui"}
+        ]
+    },
+
+    {
+        "question":[
+            {"event":"ask", "content":"When does the narwhal bacon?"}
+        ],
+        "correct":[
+            {"event":"say", "content":"Who doesn't love Reddit", "imgUrl":"http://i.imgur.com/OJIq2.png"}
+        ],
+        "incorrect":[
+            {"event":"say", "content":"Clue:"},
+            {"event":"say", "content":"reddit"}
+        ]
     }
 ]
 
@@ -100,3 +122,5 @@ also send the messages for 2 about the meaning of life
 4) favorite coworker : Anything
 5) Ghostbusters evil :  Vigo the Carpathian (will accept vigo)
 6) Blue Harvest      :  (Luke Skywalker | Mark Hammil)
+7) frisbee drop mars :  23.1620527 (except within +- 2 sec)
+8) bacon narhwal     :  midnight
