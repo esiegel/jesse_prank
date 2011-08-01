@@ -8,77 +8,95 @@ Wrong answers always include the question again.
 For example the response for question 1 is "interesting...indeed",
 also send the messages for 2 about the meaning of life
 
+[
+    {
+        "question":[
+            {"event":"say", "content":"So you think you are the Jesse?"}, 
+            {"event":"say", "content":"You must first proove your worth."}, 
+            {"event":"say", "content":"..."}, 
+            {"event":"ask", "content":"What is your name?"}
+        ],
+        "correct":[
+            {"event":"say", "content":"Interesting...indeed", "imgUrl":"http://images.icanhascheezburger.com/completestore/2008/6/15/thermometer128580142962485736.jpg"}
+        ],
+        "incorrect":[
+        ]
+    },
 
-1)
-M  So you thing you are the Jesse?
-M  You must first proove your worth.
-M  ...
-Q  What is your Name?
+    {
+        "question":[
+            {"event":"ask", "content":"What is the meaning of life and everything?"}
+        ],
+        "correct":[
+            {"event":"say", "content":"Someone appeers to be a nerd", "imgUrl":"http://3.bp.blogspot.com/_5QKKOF-S5mM/TOYrbd91dWI/AAAAAAAAAAM/jrCjx45sFYc/s1600/nerds.jpg"},
+            {"event":"say", "content":"You probably even got upset by my spelling errors"}
+        ],
+        "incorrect":[
+            {"event":"say", "content":"Nope"}
+        ]
+    },
 
-Correct 
-   anything, save this name with the user model
+    {
+        "question":[
+            {"event":"ask", "content":"What is the maximum airspeed of an unladen swallow?"},
+            {"event":"say", "content":"And we are not referring to python."}
+        ],
+        "correct":[
+            {"event":"say", "content":"Someone appeers to be a nerd", "imgUrl":"http://3.bp.blogspot.com/_5QKKOF-S5mM/TOYrbd91dWI/AAAAAAAAAAM/jrCjx45sFYc/s1600/nerds.jpg"},
+            {"event":"say", "content":"You probably even got upset by my spelling errors"}
+        ],
+        "incorrect":[
+            {"event":"say", "content":"Clue:"},
+            {"event":"say", "content":"http://lmgtfy.com"}
+        ]
+    },
 
-   M  Interesting...indeed.  ("http://images.icanhascheezburger.com/completestore/2008/6/15/thermometer128580142962485736.jpg")
+    {
+        "question":[
+            {"event":"ask", "content":"Who is your favorite coworker?"}
+        ],
+        "correct":[
+            {"event":"say", "content":"Really..."},
+            {"event":"say", "content":"That makes me sad.", "imgUrl":"http://fc08.deviantart.net/fs70/f/2010/149/a/7/Sad_Panda_Chibi_by_mongrelssister.png"}
+        ],
+        "incorrect":[
+        ]
+    },
 
-Wrong
-   never
+    {
+        "question":[
+            {"event":"ask", "content":"Who is this?", "imgUrl":"http://mos.totalfilm.com/images/7/7-pant-filling-movie-paintings-00.jpg"}
+        ],
+        "correct":[
+            {"event":"say", "content":"Wow that was pretty impressive sleuthing!", "imgUrl":"http://www.getoutdoors.com/goblog/uploads/sleuth.jpg"},
+            {"event":"say", "content":"Shall I reward you?"},
+            {"event":"say", "content":"Por vu!", "redirect":"http://www.youtube.com/watch?v=dQw4w9WgXcQ&ob=av2e"}
+        ],
+        "incorrect":[
+            {"event":"say", "content":"Clue:"},
+            {"event":"say", "content":"Slimer, Janeen, Ray, Egon ..."}
+        ]
+    },
 
-2)
-Q  What is the meaning of life and everything?
+    {
+        "question":[
+            {"event":"say", "content":"Sometimes I just can't help myself"},
+            {"event":"ask", "content":"Who is the star of the movie Blue Harvest?"}
+        ],
+        "correct":[
+            {"event":"say", "content":"Not bad", "imgUrl":"http://www.progarchives.com/progressive_rock_discography_covers/364/cover_2213172112008.JPG"}
+        ],
+        "incorrect":[
+            {"event":"say", "content":"Clue:"},
+            {"event":"say", "content":"I am your father", "imgUrl":"http://1.bp.blogspot.com/_x0AzhByC-qQ/TB7RvNbgtRI/AAAAAAAACTI/qeeZgVDcDUE/s1600/father.gif"}
+        ]
+    }
+]
 
-Correct
-   42
-
-   M Someone appeers to be a nerd. ("http://3.bp.blogspot.com/_5QKKOF-S5mM/TOYrbd91dWI/AAAAAAAAAAM/jrCjx45sFYc/s1600/nerds.jpg")
-   M You probably even noticed my typing mistake.
-
-Wrong
-   M nope
-
-3)
-Q  What is the maximum airspeed velocity of an unladen swallow?  And no we are not referring to python.
-
-Correct
-   Is it an african or european swallow? (except response that has african, european and swallow) 
-
-   M Someone appeers to be a nerd. ("http://3.bp.blogspot.com/_5QKKOF-S5mM/TOYrbd91dWI/AAAAAAAAAAM/jrCjx45sFYc/s1600/nerds.jpg")
-   M You probably even noticed my typing mistake.
-
-Wrong
-   M Clue:
-   M http://lmgtfy.com/ 
-
-4)
-Q  Who is your favorite coworker? 
-
-Correct
-    anything
-
-    M Really...
-    M That makes me sad.  ("http://fc08.deviantart.net/fs70/f/2010/149/a/7/Sad_Panda_Chibi_by_mongrelssister.png")
-
-Wrong
-    never
-
-5)
-Q Who is this? ("http://mos.totalfilm.com/images/7/7-pant-filling-movie-paintings-00.jpg")
-
-Correct
-    Vigo the Carpathian (will accept vigo)
-
-    M Wow that was pretty impressive sleuthing! ("http://www.getoutdoors.com/goblog/uploads/sleuth.jpg")
-    M Which reminds me.
-    M Check this out! 
-    M (redirect "http://www.youtube.com/watch?v=dQw4w9WgXcQ&ob=av2e")
-
-Wrong
-    M Clue:
-    M Slimer, Janeen, Ray, Egon ... 
-
-6)
-M Sometimes I just can't help myself.
-Q Who is the star of the movie Blue Harvest?  
-
-Correct
-    (Luke Skywalker | Mark Hammil)
-    
+//What is a correct answer?
+1) name              : anything, save this name with the user model
+2) life              : 42
+3) speed swallow     : Is it an african or european swallow? (except response that has african, european and swallow)
+4) favorite coworker : Anything
+5) Ghostbusters evil :  Vigo the Carpathian (will accept vigo)
+6) Blue Harvest      :  (Luke Skywalker | Mark Hammil)
