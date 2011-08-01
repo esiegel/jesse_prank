@@ -1,4 +1,4 @@
-Responses always merge the next question messages. 
+Rsponses always merge the next question messages. 
 Wrong answers always include the question again.
 For example the response for question 1 is "interesting...indeed",
 also send the messages for 2 about the meaning of life
@@ -89,7 +89,7 @@ also send the messages for 2 about the meaning of life
 
     {
         "question":[
-            {"event":"ask", "content":"How many seconds would it take a frisbee to fall 1KM on Mars?", "imgUrl":"http://www.shockya.com/news/wp-content/uploads/total_recall_arnold_scream1.jpg"}
+            {"event":"ask", "content":"How many seconds would it take a frisbee to fall 1KM on Mars?", "imgUrl":"http://www.shockya.com/news/wp-content/uploads/total_recall_arnold_scream1.jpg"},
             {"event":"say", "content":"ignoring atmospheric effects, of course"}
         ],
         "correct":[
@@ -112,6 +112,54 @@ also send the messages for 2 about the meaning of life
             {"event":"say", "content":"Clue:"},
             {"event":"say", "content":"reddit"}
         ]
+    },
+
+    {
+        "question":[
+            {"event":"ask", "content":"What's Jenny's number"}
+        ],
+        "correct":[
+            {"event":"say", "content":"Sing it", "imgUrl":"http://1.bp.blogspot.com/-8ioJ-Gi5fKY/TZLBClWTbhI/AAAAAAAAByg/LlWxkectcR8/s1600/Justin-Bieber.jpg"},
+            {"event":"say", "content":"8"},
+            {"event":"say", "content":"6"},
+            {"event":"say", "content":"7"},
+            {"event":"say", "content":"5"},
+            {"event":"say", "content":"3"},
+            {"event":"say", "content":"0"},
+            {"event":"say", "content":"9eee9"}
+        ],
+        "incorrect":[
+            {"event":"say", "content":"Clue:"},
+            {"event":"say", "content":"song of course"}
+        ]
+    },
+
+    {
+        "question":[
+            {"event":"say", "content":"What is this python an example of?", "imgUrl":"http://fc00.deviantart.net/fs70/f/2011/041/8/d/the_end_is_nye_by_abornoth-d399rvb.jpg"},
+            {"event":"ask", "content":"s=\"s=%s;print s%%`s`\";print s%`s`"}
+
+        ],
+        "correct":[
+            {"event":"say", "content":"Wow!", "imgUrl":"http://upload.wikimedia.org/wikipedia/commons/8/84/Code_de_la_Bible.png"},
+            {"event":"say", "content":"You did it!"},
+            {"event":"say", "content":"You must truly be"},
+            {"event":"say", "content":"..."},
+            {"event":"say", "content":"THE JESSE!!"},
+            {"event":"say", "content":"..."},
+            {"event":"say", "content":"credits"},
+            {"event":"say", "content":"MISCHIEF MOHIT"},
+            {"event":"say", "content":"and"},
+            {"event":"say", "content":"HOOLIGAN SIEGEL"},
+            {"event":"say", "content":"..."},
+            {"event":"say", "content":"until next time..."},
+            {"event":"say", "content":"..."},
+            {"event":"say", "content":"...", "redirect":"http://nyan.cat"}
+        ],
+        "incorrect":[
+            {"event":"say", "content":"Clue:"},
+            {"event":"say", "content":"doesn't it's output look strangely similar?"}
+        ]
     }
 ]
 
@@ -120,7 +168,9 @@ also send the messages for 2 about the meaning of life
 2) life              : 42
 3) speed swallow     : Is it an african or european swallow? (except response that has african, european and swallow)
 4) favorite coworker : Anything
-5) Ghostbusters evil :  Vigo the Carpathian (will accept vigo)
-6) Blue Harvest      :  (Luke Skywalker | Mark Hammil)
-7) frisbee drop mars :  23.1620527 (except within +- 2 sec)
-8) bacon narhwal     :  midnight
+5) Ghostbusters evil : Vigo the Carpathian (will accept vigo)
+6) Blue Harvest      : (Luke Skywalker | Mark Hammil)
+7) frisbee drop mars : 23.1620527 (except within +- 2 sec)
+8) bacon narhwal     : midnight
+9) Jenny call her    : 8675309
+10) quine            : quine 
